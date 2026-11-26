@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Switch Challenge — Seaboard A-Line Simulator</title>
+  <link rel="stylesheet" href="src/styles.css" />
+</head>
+<body>
+  <div id="hud-top">
+    <div class="brand">SWITCH CHALLENGE // SEABOARD A-LINE (RICHMOND ACCA YARD → ROCKY MOUNT, NC)</div>
+    <div class="role-toggle">
+      <button id="btn-engineer" class="active">ROLE: ENGINEER</button>
+      <button id="btn-conductor">ROLE: CONDUCTOR</button>
+    </div>
+  </div>
+
+  <main id="cab-viewport">
+    <canvas id="track-canvas" width="1100" height="420"></canvas>
+
+    <div id="ptc-panel">
+      <div class="ptc-header">
+        <span>PTC // WABTEC I-ETMS</span>
+        <span id="ptc-status" class="status-active">ACTIVE - ENFORCED</span>
+      </div>
+      <div class="ptc-grid">
+        <div class="ptc-box">
+          <label>CURRENT SPEED</label>
+          <div id="ptc-speed" class="ptc-val">0 MPH</div>
+        </div>
+        <div class="ptc-box">
+          <label>AUTHORIZED LIMIT</label>
+          <div id="ptc-limit" class="ptc-val warn">15 MPH</div>
+        </div>
+        <div class="ptc-box">
+          <label>NEXT SIGNAL / SWITCH</label>
+          <div id="ptc-signal" class="ptc-val clear">RESTRICTING (ACCA YARD LEAD)</div>
+        </div>
+        <div class="ptc-box">
+          <label>MILEPOST / CORRIDOR</label>
+          <div id="ptc-mp" class="ptc-val">MP A-0.0 (ACCA YARD)</div>
+        </div>
+      </div>
+      <div id="alerter-bar" class="alerter-ok">
+        <span>ALERTER: OK</span>
+        <button id="btn-alerter">ACK ALERTER [SPACE]</button>
+      </div>
+    </div>
+  </main>
+
+  <section id="control-desk">
+    <div id="engineer-controls" class="desk-panel">
+      <h3>LOCOMOTIVE STAND (WIDE-BODY CAB)</h3>
+      <div class="controls-row">
+        <div class="control-group">
+          <label>REVERSER</label>
+          <select id="reverser">
+            <option value="1">FORWARD</option>
+            <option value="0" selected>NEUTRAL</option>
+            <option value="-1">REVERSE</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label>THROTTLE: <span id="throttle-val">IDLE</span></label>
+          <input type="range" id="throttle" min="0" max="8" value="0" />
+        </div>
+        <div class="control-group">
+          <label>INDEPENDENT BRAKE: <span id="ind-brake-val">100%</span></label>
+          <input type="range" id="ind-brake" min="0" max="100" value="100" />
+        </div>
+        <div class="control-group">
+          <label>AUTOMATIC BRAKE: <span id="auto-brake-val">0%</span></label>
+          <input type="range" id="auto-brake" min="0" max="100" value="0" />
+        </div>
+        <div class="control-group">
+          <button id="btn-horn" class="horn-btn">HORN [H]</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="conductor-controls" class="desk-panel hidden">
+      <h3>CONDUCTOR / YARD SWITCH LIST &amp; DISPATCH</h3>
+      <div class="switch-board">
+        <div class="switch-item">
+          <span><strong>SW-01 (Acca South Wye):</strong> Route Selection</span>
+          <button id="btn-sw-wye" class="sw-btn">LINED: A-LINE SOUTH (BELLWOOD / ROCKY MOUNT)</button>
+        </div>
+        <div class="switch-item">
+          <span><strong>SW-02 (Bellwood Industrial Lead):</strong> Siding Turnout</span>
+          <button id="btn-sw-bellwood" class="sw-btn">LINED: MAINLINE</button>
+        </div>
+        <div class="switch-item">
+          <span><strong>Job Manifest:</strong></span>
+          <span id="manifest-text">Depart Acca Yard Track 4 → Clear South Wye → Proceed South toward Bellwood &amp; Rocky Mount.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="src/game.js"></script>
+</body>
+</html>
